@@ -285,7 +285,9 @@ function App() {
         >
           Complete a row of challenges (vertically, horizontally, or diagonally)
           and fill out the form to be entered to win a prize! Participants may
-          enter more than one completed sheet!
+          enter more than one completed sheet! \n Please note: When you complete
+          a Bingo, a form will come up asking for your information, including
+          what prize you are putting this bingo in for.
         </Typography>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <tbody>
