@@ -278,7 +278,8 @@ function App() {
         </Grid>
         <Typography variant="h5" style={{backgroundColor: "#FFFFFF", padding: "5px"}}>Complete a row of challenges (vertically, horizontally, or diagonally)
 and fill out the form to be entered to win a prize!
-Participants may enter more than one completed sheet!</Typography>
+Participants may enter more than one completed sheet!
+Please note: When you complete a Bingo, a form will come up asking for your information, including what prize you are putting this bingo in for. </Typography>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <tr className={classes.trBorder}>
             <td
