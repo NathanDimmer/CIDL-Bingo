@@ -8,10 +8,8 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  DialogContentText,
   DialogActions,
   Button,
-  Slide,
 } from "@material-ui/core";
 import BingoSquare from "./bingoSquare";
 
@@ -61,6 +59,8 @@ function App() {
   const [numBingos, setNumBingos] = React.useState(0);
 
   const [cookiesLoaded, setCookiesLoaded] = React.useState(false);
+
+  const [warning, setWarning] = React.useState(false);
 
   const loadCookies = () => {
     console.log(document.cookie);
@@ -119,6 +119,9 @@ function App() {
       loadCookies();
     } else {
       updateCookies();
+      // if (window.innerWidth < 600) {
+      //   setWarning(true);
+      // }
     }
   });
 
@@ -126,15 +129,21 @@ function App() {
     setOpen(true);
   };
 
+  const handleCLoseWarning = () => {
+    setWarning(false);
+  }
+
   const handleClose = () => {
     setOpen(false);
-    setNumBingos(numBingos - 1);
+    
     var millisecondsToWait = 500;
     setTimeout(function () {
-      if (numBingos > 0) {
+      if (numBingos - 1 > 0) {
         setOpen(true);
       }
     }, millisecondsToWait);
+
+    setNumBingos(numBingos - 1);
   };
 
   const handleClick = (x: number, y: number) => {
@@ -230,16 +239,29 @@ function App() {
             </Typography>
           </Grid>
         </Grid>
+        <Grid container direction="row" justify="center" style={{marginBottom: "10px"}}>
+          <Grid item style={{marginRight: "20px"}}>
         <Button
           variant="contained"
           onClick={() => {
             clearBoard();
           }}
-          style={{ marginBottom: "10px" }}
         >
           Clear Board
         </Button>
-        <Typography variant="h5" style={{backgroundColor: "#FFFFFF"}}>Complete a row of challenges (vertically, horizontally, or diagonally)
+        </Grid>
+        <Grid item>
+          <a href="https://cidlibrary.org/images/Adult/2020%20-%20Adult%20SRP%20Bingo%20Sheet(Web).pdf">
+        <Button
+          variant="contained"
+        >
+          View Board as a PDF
+        </Button>
+        </a>
+        </Grid>
+        
+        </Grid>
+        <Typography variant="h5" style={{backgroundColor: "#FFFFFF", padding: "5px"}}>Complete a row of challenges (vertically, horizontally, or diagonally)
 and fill out the form to be entered to win a prize!
 Participants may enter more than one completed sheet!</Typography>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -623,6 +645,31 @@ Participants may enter more than one completed sheet!</Typography>
           <Button onClick={handleClose} color="primary">
             Done
           </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog
+        open={warning}
+        keepMounted
+        onClose={handleCLoseWarning}
+        aria-labelledby="alert-dialog-slide-title"
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle id="alert-dialog-slide-title">
+          {
+            "Your device's screen is too small."
+          }
+        </DialogTitle>
+        <DialogContent><Typography variant="body1">For a better experience, we recommend that you either open this site on a device with a larger screen, or view the PDF copy of the bingo sheet, and submit your bingos by calling the library.</Typography></DialogContent>
+          <DialogActions>
+          <Button onClick={handleClose} color="primary" variant="text">
+            Continue anyway
+          </Button>
+          <a href="https://cidlibrary.org/images/Adult/2020%20-%20Adult%20SRP%20Bingo%20Sheet(Web).pdf">
+          <Button onClick={handleClose} color="primary" variant="contained">
+            View PDF
+          </Button>
+          </a>
         </DialogActions>
       </Dialog>
     </div>

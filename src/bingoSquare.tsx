@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import './App.css';
-import {Grid, Typography, Container} from "@material-ui/core";
+import {Typography} from "@material-ui/core";
 
 interface squareProps {
     text: string;
