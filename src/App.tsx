@@ -255,7 +255,7 @@ function App() {
         <Button
           variant="contained"
         >
-          View Board as a PDF
+          View / Download PDF
         </Button>
         </a>
         </Grid>
