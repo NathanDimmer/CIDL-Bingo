@@ -114,14 +114,12 @@ function App() {
     console.log(document.cookie);
   };
 
-  const checkScreenSize = () => {
-
-  }
+  const checkScreenSize = () => {};
 
   const findHeight = () => {
-    if ((window.innerWidth < 800) && (!warningShown)) {
-      setWarning(true)
-      setWarningShown(true)
+    if (window.innerWidth < 750 && !warningShown) {
+      setWarning(true);
+      setWarningShown(true);
     }
   };
 
@@ -132,12 +130,7 @@ function App() {
       findHeight();
     } else {
       updateCookies();
-      }
-      window.addEventListener("resize", findHeight);
-
-      return () => {
-        window.removeEventListener("resize", findHeight);
-      };
+    }
   });
 
   const handleClickOpen = () => {
@@ -146,11 +139,11 @@ function App() {
 
   const handleCloseWarning = () => {
     setWarning(false);
-  }
+  };
 
   const handleClose = () => {
     setOpen(false);
-    
+
     var millisecondsToWait = 500;
     setTimeout(function () {
       if (numBingos - 1 > 0) {
@@ -236,7 +229,10 @@ function App() {
   };
 
   return (
-    <div className="App" style={{backgroundImage: 'url(' + require('./background.png') + ')'}}>
+    <div
+      className="App"
+      style={{ backgroundImage: "url(" + require("./background.png") + ")" }}
+    >
       <Container>
         <Grid container justify="center">
           <Grid item>
@@ -254,393 +250,406 @@ function App() {
             </Typography>
           </Grid>
         </Grid>
-        <Grid container direction="row" justify="center" style={{marginBottom: "10px"}}>
-          <Grid item style={{marginRight: "20px"}}>
-        <Button
-          variant="contained"
-          onClick={() => {
-            clearBoard();
-          }}
+        <Grid
+          container
+          direction="row"
+          justify="center"
+          style={{ marginBottom: "10px" }}
         >
-          Clear Board
-        </Button>
+          <Grid item style={{ marginRight: "20px" }}>
+            <Button
+              variant="contained"
+              onClick={() => {
+                clearBoard();
+              }}
+            >
+              Clear Board
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              variant="contained"
+              onClick={(e) => {
+                e.preventDefault();
+                window.location.href =
+                  "https://cidlibrary.org/images/Adult/2020%20-%20Adult%20SRP%20Bingo%20Sheet(Web).pdf";
+              }}
+            >
+              View / Download PDF
+            </Button>
+          </Grid>
         </Grid>
-        <Grid item>
-          <a href="https://cidlibrary.org/images/Adult/2020%20-%20Adult%20SRP%20Bingo%20Sheet(Web).pdf">
-        <Button
-          variant="contained"
+        <Typography
+          variant="h5"
+          style={{ backgroundColor: "#FFFFFF", padding: "5px" }}
         >
-          View / Download PDF
-        </Button>
-        </a>
-        </Grid>
-        
-        </Grid>
-        <Typography variant="h5" style={{backgroundColor: "#FFFFFF", padding: "5px"}}>Complete a row of challenges (vertically, horizontally, or diagonally)
-and fill out the form to be entered to win a prize!
-Participants may enter more than one completed sheet!
-Please note: When you complete a Bingo, a form will come up asking for your information, including what prize you are putting this bingo in for. </Typography>
+          Complete a row of challenges (vertically, horizontally, or diagonally)
+          and fill out the form to be entered to win a prize! Participants may
+          enter more than one completed sheet!
+        </Typography>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
-          <tr className={classes.trBorder}>
-            <td
-              className={
-                squares[0][0] ? classes.tdBorderSelected : classes.tdBorder
-              }
-              onClick={() => {
-                handleClick(0, 0);
-              }}
-            >
-              <BingoSquare
-                size=""
-                text="Read for 2 Hours"
-                image="../../Assets/1.png"
-              ></BingoSquare>
-            </td>
-            <td
-              className={
-                squares[0][1] ? classes.tdBorderSelected : classes.tdBorder
-              }
-              onClick={() => {
-                handleClick(0, 1);
-              }}
-            >
-              <BingoSquare
-                size="60"
-                text="Like Us on Instagram @cidlib"
-                image="../../Assets/2.png"
-              ></BingoSquare>
-            </td>
-            <td
-              className={
-                squares[0][2] ? classes.tdBorderSelected : classes.tdBorder
-              }
-              onClick={() => {
-                handleClick(0, 2);
-              }}
-            >
-              <BingoSquare
-                size="150"
-                text="Explore Creative Bug"
-                image="../../Assets/3.png"
-              ></BingoSquare>
-            </td>
-            <td
-              className={
-                squares[0][3] ? classes.tdBorderSelected : classes.tdBorder
-              }
-              onClick={() => {
-                handleClick(0, 3);
-              }}
-            >
-              <BingoSquare
-                size="100"
-                text="Attend our 'Anywhere Reads' virtual book group"
-                image="../../Assets/4.png"
-              ></BingoSquare>
-            </td>
-            <td
-              className={
-                squares[0][4] ? classes.tdBorderSelected : classes.tdBorder
-              }
-              onClick={() => {
-                handleClick(0, 4);
-              }}
-            >
-              <BingoSquare
-                size="200"
-                text="Research an Ancestor on Ancestry Library Edition"
-                image="../../Assets/5.png"
-              ></BingoSquare>
-            </td>
-          </tr>
-          <tr className={classes.trBorder}>
-            <td
-              className={
-                squares[1][0] ? classes.tdBorderSelected : classes.tdBorder
-              }
-              onClick={() => {
-                handleClick(1, 0);
-              }}
-            >
-              <BingoSquare
-                size=""
-                text="Follow us on Facebook @CIDLibrary"
-                image="../../Assets/6.png"
-              ></BingoSquare>
-            </td>
-            <td
-              className={
-                squares[1][1] ? classes.tdBorderSelected : classes.tdBorder
-              }
-              onClick={() => {
-                handleClick(1, 1);
-              }}
-            >
-              <BingoSquare
-                size="125"
-                text="Learn a Language with Mango"
-                image="../../Assets/7.png"
-              ></BingoSquare>
-            </td>
-            <td
-              className={
-                squares[1][2] ? classes.tdBorderSelected : classes.tdBorder
-              }
-              onClick={() => {
-                handleClick(1, 2);
-              }}
-            >
-              <BingoSquare
-                size=""
-                text="Download a Book Using Overdrive"
-                image="../../Assets/8.png"
-              ></BingoSquare>
-            </td>
-            <td
-              className={
-                squares[1][3] ? classes.tdBorderSelected : classes.tdBorder
-              }
-              onClick={() => {
-                handleClick(1, 3);
-              }}
-            >
-              <BingoSquare
-                size=""
-                text="Read a Romance Novel"
-                image="../../Assets/9.png"
-              ></BingoSquare>
-            </td>
-            <td
-              className={
-                squares[1][4] ? classes.tdBorderSelected : classes.tdBorder
-              }
-              onClick={() => {
-                handleClick(1, 4);
-              }}
-            >
-              <BingoSquare
-                size=""
-                text="Read for 2 Hours"
-                image="../../Assets/1.png"
-              ></BingoSquare>
-            </td>
-          </tr>
-          <tr className={classes.trBorder}>
-            <td
-              className={
-                squares[2][0] ? classes.tdBorderSelected : classes.tdBorder
-              }
-              onClick={() => {
-                handleClick(2, 0);
-              }}
-            >
-              <BingoSquare
-                size=""
-                text="Download Music Using Hoopla"
-                image="../../Assets/11.png"
-              ></BingoSquare>
-            </td>
-            <td
-              className={
-                squares[2][1] ? classes.tdBorderSelected : classes.tdBorder
-              }
-              onClick={() => {
-                handleClick(2, 1);
-              }}
-            >
-              <BingoSquare
-                size=""
-                text="Subscribe to Our YouTube Channel"
-                image="../../Assets/12.png"
-              ></BingoSquare>
-            </td>
-            <td
-              className={
-                squares[2][2] ? classes.tdBorderSelected : classes.tdBorder
-              }
-              onClick={() => {
-                handleClick(2, 2);
-              }}
-            >
-              <BingoSquare
-                size="165"
-                text="Free Space!"
-                image="../../Assets/13.png"
-              ></BingoSquare>
-            </td>
-            <td
-              className={
-                squares[2][3] ? classes.tdBorderSelected : classes.tdBorder
-              }
-              onClick={() => {
-                handleClick(2, 3);
-              }}
-            >
-              <BingoSquare
-                size=""
-                text="Read for 2 Hours"
-                image="../../Assets/1.png"
-              ></BingoSquare>
-            </td>
-            <td
-              className={
-                squares[2][4] ? classes.tdBorderSelected : classes.tdBorder
-              }
-              onClick={() => {
-                handleClick(2, 4);
-              }}
-            >
-              <BingoSquare
-                size=""
-                text="Learn About One of Our Resources by Watching an Explore in 4 Video"
-                image=""
-              ></BingoSquare>
-            </td>
-          </tr>
-          <tr className={classes.trBorder}>
-            <td
-              className={
-                squares[3][0] ? classes.tdBorderSelected : classes.tdBorder
-              }
-              onClick={() => {
-                handleClick(3, 0);
-              }}
-            >
-              <BingoSquare
-                size=""
-                text="Download a Movie Using Kanopy"
-                image="../../Assets/16.png"
-              ></BingoSquare>
-            </td>
-            <td
-              className={
-                squares[3][1] ? classes.tdBorderSelected : classes.tdBorder
-              }
-              onClick={() => {
-                handleClick(3, 1);
-              }}
-            >
-              <BingoSquare
-                size=""
-                text="Read for 2 Hours"
-                image="../../Assets/1.png"
-              ></BingoSquare>
-            </td>
-            <td
-              className={
-                squares[3][2] ? classes.tdBorderSelected : classes.tdBorder
-              }
-              onClick={() => {
-                handleClick(3, 2);
-              }}
-            >
-              <BingoSquare
-                size=""
-                text="Download a Magazine using RBDigital"
-                image="../../Assets/18.png"
-              ></BingoSquare>
-            </td>
-            <td
-              className={
-                squares[3][3] ? classes.tdBorderSelected : classes.tdBorder
-              }
-              onClick={() => {
-                handleClick(3, 3);
-              }}
-            >
-              <BingoSquare
-                size=""
-                text="Read a Post on Beth's Blog"
-                image="../../Assets/19.png"
-              ></BingoSquare>
-            </td>
-            <td
-              className={
-                squares[3][4] ? classes.tdBorderSelected : classes.tdBorder
-              }
-              onClick={() => {
-                handleClick(3, 4);
-              }}
-            >
-              <BingoSquare
-                size=""
-                text="Download a Book Using Overdrive"
-                image="../../Assets/8.png"
-              ></BingoSquare>
-            </td>
-          </tr>
-          <tr className={classes.trBorder}>
-            <td
-              className={
-                squares[4][0] ? classes.tdBorderSelected : classes.tdBorder
-              }
-              onClick={() => {
-                handleClick(4, 0);
-              }}
-            >
-              <BingoSquare
-                size=""
-                text="Take a Class with Gale Courses"
-                image="../../Assets/21.png"
-              ></BingoSquare>
-            </td>
-            <td
-              className={
-                squares[4][1] ? classes.tdBorderSelected : classes.tdBorder
-              }
-              onClick={() => {
-                handleClick(4, 1);
-              }}
-            >
-              <BingoSquare
-                size=""
-                text="Read a Children's Book"
-                image="../../Assets/22.png"
-              ></BingoSquare>
-            </td>
-            <td
-              className={
-                squares[4][2] ? classes.tdBorderSelected : classes.tdBorder
-              }
-              onClick={() => {
-                handleClick(4, 2);
-              }}
-            >
-              <BingoSquare
-                size=""
-                text="Download a Comic With Hoopla"
-                image="../../Assets/11.png"
-              ></BingoSquare>
-            </td>
-            <td
-              className={
-                squares[4][3] ? classes.tdBorderSelected : classes.tdBorder
-              }
-              onClick={() => {
-                handleClick(4, 3);
-              }}
-            >
-              <BingoSquare
-                size=""
-                text="Read for 2 Hours"
-                image="../../Assets/1.png"
-              ></BingoSquare>
-            </td>
-            <td
-              className={
-                squares[4][4] ? classes.tdBorderSelected : classes.tdBorder
-              }
-              onClick={() => {
-                handleClick(4, 4);
-              }}
-            >
-              <BingoSquare
-                size=""
-                text="Attend a Virtual Library Event"
-                image="../../Assets/25.png"
-              ></BingoSquare>
-            </td>
-          </tr>
+          <tbody>
+            <tr className={classes.trBorder}>
+              <td
+                className={
+                  squares[0][0] ? classes.tdBorderSelected : classes.tdBorder
+                }
+                onClick={() => {
+                  handleClick(0, 0);
+                }}
+              >
+                <BingoSquare
+                  size=""
+                  text="Read for 2 Hours"
+                  image="../../Assets/1.png"
+                ></BingoSquare>
+              </td>
+              <td
+                className={
+                  squares[0][1] ? classes.tdBorderSelected : classes.tdBorder
+                }
+                onClick={() => {
+                  handleClick(0, 1);
+                }}
+              >
+                <BingoSquare
+                  size="60"
+                  text="Like Us on Instagram @cidlib"
+                  image="../../Assets/2.png"
+                ></BingoSquare>
+              </td>
+              <td
+                className={
+                  squares[0][2] ? classes.tdBorderSelected : classes.tdBorder
+                }
+                onClick={() => {
+                  handleClick(0, 2);
+                }}
+              >
+                <BingoSquare
+                  size="150"
+                  text="Explore Crative Bug"
+                  image="../../Assets/3.png"
+                ></BingoSquare>
+              </td>
+              <td
+                className={
+                  squares[0][3] ? classes.tdBorderSelected : classes.tdBorder
+                }
+                onClick={() => {
+                  handleClick(0, 3);
+                }}
+              >
+                <BingoSquare
+                  size="100"
+                  text="Attend our 'Anywhere Reads' virtual book group"
+                  image="../../Assets/4.png"
+                ></BingoSquare>
+              </td>
+              <td
+                className={
+                  squares[0][4] ? classes.tdBorderSelected : classes.tdBorder
+                }
+                onClick={() => {
+                  handleClick(0, 4);
+                }}
+              >
+                <BingoSquare
+                  size="200"
+                  text="Research an Ancestor on Ancestry Library Edition"
+                  image="../../Assets/5.png"
+                ></BingoSquare>
+              </td>
+            </tr>
+            <tr className={classes.trBorder}>
+              <td
+                className={
+                  squares[1][0] ? classes.tdBorderSelected : classes.tdBorder
+                }
+                onClick={() => {
+                  handleClick(1, 0);
+                }}
+              >
+                <BingoSquare
+                  size=""
+                  text="Follow us on Facebook @CIDLibrary"
+                  image="../../Assets/6.png"
+                ></BingoSquare>
+              </td>
+              <td
+                className={
+                  squares[1][1] ? classes.tdBorderSelected : classes.tdBorder
+                }
+                onClick={() => {
+                  handleClick(1, 1);
+                }}
+              >
+                <BingoSquare
+                  size="125"
+                  text="Learn a Language with Mango"
+                  image="../../Assets/7.png"
+                ></BingoSquare>
+              </td>
+              <td
+                className={
+                  squares[1][2] ? classes.tdBorderSelected : classes.tdBorder
+                }
+                onClick={() => {
+                  handleClick(1, 2);
+                }}
+              >
+                <BingoSquare
+                  size=""
+                  text="Download a Book Using Overdrive"
+                  image="../../Assets/8.png"
+                ></BingoSquare>
+              </td>
+              <td
+                className={
+                  squares[1][3] ? classes.tdBorderSelected : classes.tdBorder
+                }
+                onClick={() => {
+                  handleClick(1, 3);
+                }}
+              >
+                <BingoSquare
+                  size=""
+                  text="Read a Romance Novel"
+                  image="../../Assets/9.png"
+                ></BingoSquare>
+              </td>
+              <td
+                className={
+                  squares[1][4] ? classes.tdBorderSelected : classes.tdBorder
+                }
+                onClick={() => {
+                  handleClick(1, 4);
+                }}
+              >
+                <BingoSquare
+                  size=""
+                  text="Read for 2 Hours"
+                  image="../../Assets/1.png"
+                ></BingoSquare>
+              </td>
+            </tr>
+            <tr className={classes.trBorder}>
+              <td
+                className={
+                  squares[2][0] ? classes.tdBorderSelected : classes.tdBorder
+                }
+                onClick={() => {
+                  handleClick(2, 0);
+                }}
+              >
+                <BingoSquare
+                  size=""
+                  text="Download Music Using Hoopla"
+                  image="../../Assets/11.png"
+                ></BingoSquare>
+              </td>
+              <td
+                className={
+                  squares[2][1] ? classes.tdBorderSelected : classes.tdBorder
+                }
+                onClick={() => {
+                  handleClick(2, 1);
+                }}
+              >
+                <BingoSquare
+                  size=""
+                  text="Subscribe to Our YouTube Channel"
+                  image="../../Assets/12.png"
+                ></BingoSquare>
+              </td>
+              <td
+                className={
+                  squares[2][2] ? classes.tdBorderSelected : classes.tdBorder
+                }
+                onClick={() => {
+                  handleClick(2, 2);
+                }}
+              >
+                <BingoSquare
+                  size="165"
+                  text="Free Space!"
+                  image="../../Assets/13.png"
+                ></BingoSquare>
+              </td>
+              <td
+                className={
+                  squares[2][3] ? classes.tdBorderSelected : classes.tdBorder
+                }
+                onClick={() => {
+                  handleClick(2, 3);
+                }}
+              >
+                <BingoSquare
+                  size=""
+                  text="Read for 2 Hours"
+                  image="../../Assets/1.png"
+                ></BingoSquare>
+              </td>
+              <td
+                className={
+                  squares[2][4] ? classes.tdBorderSelected : classes.tdBorder
+                }
+                onClick={() => {
+                  handleClick(2, 4);
+                }}
+              >
+                <BingoSquare
+                  size=""
+                  text="Learn About One of Our Resources by Watching an Explore in Four Video"
+                  image=""
+                ></BingoSquare>
+              </td>
+            </tr>
+            <tr className={classes.trBorder}>
+              <td
+                className={
+                  squares[3][0] ? classes.tdBorderSelected : classes.tdBorder
+                }
+                onClick={() => {
+                  handleClick(3, 0);
+                }}
+              >
+                <BingoSquare
+                  size=""
+                  text="Download a Movie Using Kanopy"
+                  image="../../Assets/16.png"
+                ></BingoSquare>
+              </td>
+              <td
+                className={
+                  squares[3][1] ? classes.tdBorderSelected : classes.tdBorder
+                }
+                onClick={() => {
+                  handleClick(3, 1);
+                }}
+              >
+                <BingoSquare
+                  size=""
+                  text="Read for 2 Hours"
+                  image="../../Assets/1.png"
+                ></BingoSquare>
+              </td>
+              <td
+                className={
+                  squares[3][2] ? classes.tdBorderSelected : classes.tdBorder
+                }
+                onClick={() => {
+                  handleClick(3, 2);
+                }}
+              >
+                <BingoSquare
+                  size=""
+                  text="Download a Magazine using RBDigital"
+                  image="../../Assets/18.png"
+                ></BingoSquare>
+              </td>
+              <td
+                className={
+                  squares[3][3] ? classes.tdBorderSelected : classes.tdBorder
+                }
+                onClick={() => {
+                  handleClick(3, 3);
+                }}
+              >
+                <BingoSquare
+                  size=""
+                  text="Read a Post on Beth's Blog"
+                  image="../../Assets/19.png"
+                ></BingoSquare>
+              </td>
+              <td
+                className={
+                  squares[3][4] ? classes.tdBorderSelected : classes.tdBorder
+                }
+                onClick={() => {
+                  handleClick(3, 4);
+                }}
+              >
+                <BingoSquare
+                  size=""
+                  text="Download a Book Using Overdrive"
+                  image="../../Assets/8.png"
+                ></BingoSquare>
+              </td>
+            </tr>
+            <tr className={classes.trBorder}>
+              <td
+                className={
+                  squares[4][0] ? classes.tdBorderSelected : classes.tdBorder
+                }
+                onClick={() => {
+                  handleClick(4, 0);
+                }}
+              >
+                <BingoSquare
+                  size=""
+                  text="Take a Class with Gale Courses"
+                  image="../../Assets/21.png"
+                ></BingoSquare>
+              </td>
+              <td
+                className={
+                  squares[4][1] ? classes.tdBorderSelected : classes.tdBorder
+                }
+                onClick={() => {
+                  handleClick(4, 1);
+                }}
+              >
+                <BingoSquare
+                  size=""
+                  text="Read a Chilren's Book"
+                  image="../../Assets/22.png"
+                ></BingoSquare>
+              </td>
+              <td
+                className={
+                  squares[4][2] ? classes.tdBorderSelected : classes.tdBorder
+                }
+                onClick={() => {
+                  handleClick(4, 2);
+                }}
+              >
+                <BingoSquare
+                  size=""
+                  text="Download a Comic With Hoopla"
+                  image="../../Assets/11.png"
+                ></BingoSquare>
+              </td>
+              <td
+                className={
+                  squares[4][3] ? classes.tdBorderSelected : classes.tdBorder
+                }
+                onClick={() => {
+                  handleClick(4, 3);
+                }}
+              >
+                <BingoSquare
+                  size=""
+                  text="Read for 2 Hours"
+                  image="../../Assets/1.png"
+                ></BingoSquare>
+              </td>
+              <td
+                className={
+                  squares[4][4] ? classes.tdBorderSelected : classes.tdBorder
+                }
+                onClick={() => {
+                  handleClick(4, 4);
+                }}
+              >
+                <BingoSquare
+                  size=""
+                  text="Attend a Virtual Library Event"
+                  image="../../Assets/25.png"
+                ></BingoSquare>
+              </td>
+            </tr>
+          </tbody>
         </table>
       </Container>
 
@@ -656,7 +665,16 @@ Please note: When you complete a Bingo, a form will come up asking for your info
             "You got a bingo! Fill out the form below to be entered to win a prize!"
           }
         </DialogTitle>
-        <DialogContent><iframe src="https://docs.google.com/forms/d/e/1FAIpQLSesV0XSTUr2HBxqc3Z9eWLyjnIOKTUP2ckr8A1pPCRWbDgfYA/viewform?embedded=true" width="100%" height="500px" title="Bingo Form">Loading…</iframe></DialogContent>
+        <DialogContent>
+          <iframe
+            src="https://docs.google.com/forms/d/e/1FAIpQLSesV0XSTUr2HBxqc3Z9eWLyjnIOKTUP2ckr8A1pPCRWbDgfYA/viewform?embedded=true"
+            width="100%"
+            height="500px"
+            title="Bingo Form"
+          >
+            Loading…
+          </iframe>
+        </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Done
@@ -670,23 +688,32 @@ Please note: When you complete a Bingo, a form will come up asking for your info
         onClose={handleCloseWarning}
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
+        fullScreen={true}
       >
         <DialogTitle id="alert-dialog-slide-title">
-          {
-            "Your device's screen is too small."
-          }
+          {"Your device's screen is too small."}
         </DialogTitle>
-        <DialogContent><Typography variant="body1">For a better experience, we recommend that you either open this site on a device with a larger screen, or view the PDF copy of the bingo sheet, and submit your bingos by calling the library.</Typography></DialogContent>
-          <DialogActions>
-          <Button onClick={handleCloseWarning} color="primary" variant="text">
-            Continue anyway
-          </Button>
-          <a href="https://cidlibrary.org/images/Adult/2020%20-%20Adult%20SRP%20Bingo%20Sheet(Web).pdf">
-          <Button color="primary" variant="contained">
+        <DialogContent>
+          <Typography
+            variant="body1"
+            style={{ width: "80vw", marginBottom: "20px" }}
+          >
+            For a better experience, we recommend that you either open this site
+            on a device with a larger screen, or view the PDF copy of the bingo
+            sheet, and submit your bingos by calling the library.
+          </Typography>
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href =
+                "https://cidlibrary.org/images/Adult/2020%20-%20Adult%20SRP%20Bingo%20Sheet(Web).pdf";
+            }}
+          >
             View PDF
           </Button>
-          </a>
-        </DialogActions>
+        </DialogContent>
       </Dialog>
     </div>
   );
