@@ -114,8 +114,6 @@ function App() {
     console.log(document.cookie);
   };
 
-  const checkScreenSize = () => {};
-
   const findHeight = () => {
     if (window.innerWidth < 750 && !warningShown) {
       setWarning(true);
@@ -125,17 +123,13 @@ function App() {
 
   useEffect(() => {
     if (!cookiesLoaded) {
-      setCookiesLoaded(true);
-      loadCookies();
+      // setCookiesLoaded(true);
+      // loadCookies();
       findHeight();
     } else {
-      updateCookies();
+      // updateCookies();
     }
   });
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
 
   const handleCloseWarning = () => {
     setWarning(false);
