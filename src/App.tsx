@@ -618,7 +618,7 @@ Participants may enter more than one completed sheet!</Typography>
             "You got a bingo! Fill out the form below to be entered to win a prize!"
           }
         </DialogTitle>
-        <DialogContent><iframe src="https://docs.google.com/forms/d/e/1FAIpQLSesV0XSTUr2HBxqc3Z9eWLyjnIOKTUP2ckr8A1pPCRWbDgfYA/viewform?embedded=true" width="100%" height="100%" title="Bingo Form">Loading…</iframe></DialogContent>
+        <DialogContent><iframe src="https://docs.google.com/forms/d/e/1FAIpQLSesV0XSTUr2HBxqc3Z9eWLyjnIOKTUP2ckr8A1pPCRWbDgfYA/viewform?embedded=true" width="100%" height="500px" title="Bingo Form">Loading…</iframe></DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Done
