@@ -304,7 +304,7 @@ Participants may enter more than one completed sheet!</Typography>
             >
               <BingoSquare
                 size="150"
-                text="Explore Crative Bug"
+                text="Explore Creative Bug"
                 image="../../Assets/3.png"
               ></BingoSquare>
             </td>
@@ -476,7 +476,7 @@ Participants may enter more than one completed sheet!</Typography>
             >
               <BingoSquare
                 size=""
-                text="Learn About One of Our Resources by Watching an Explore in Four Video"
+                text="Learn About One of Our Resources by Watching an Explore in 4 Video"
                 image=""
               ></BingoSquare>
             </td>
@@ -578,7 +578,7 @@ Participants may enter more than one completed sheet!</Typography>
             >
               <BingoSquare
                 size=""
-                text="Read a Chilren's Book"
+                text="Read a Children's Book"
                 image="../../Assets/22.png"
               ></BingoSquare>
             </td>
