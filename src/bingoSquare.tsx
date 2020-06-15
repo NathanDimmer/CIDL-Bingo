@@ -12,7 +12,7 @@ const BingoSquare : React.FunctionComponent<squareProps> = ({text, image, size})
   return (
     <Fragment>
         <Typography variant="h6">{text}</Typography>
-        {(image !== "") && <img src={image} style={{width: size !== "" ? (size + "px") : "75px"}}></img>}
+        {(image !== "") && <img src={image} style={{width: size !== "" ? (size + "px") : "75px"}} alt={text}></img>}
     </Fragment>
   );
 }

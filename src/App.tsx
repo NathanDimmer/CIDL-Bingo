@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import {
   Grid,
@@ -17,18 +17,18 @@ import BingoSquare from "./bingoSquare";
 
 const useStyles = makeStyles({
   trBorder: {
-    border: "1px solid black",
+    border: "2px solid black",
     borderCollapse: "collapse",
   },
   tdBorder: {
-    border: "1px solid black",
+    border: "2px solid black",
     borderCollapse: "collapse",
     width: "18vw",
     backgroundColor: "#FFFFFF",
     transition: "0.2s",
   },
   tdBorderSelected: {
-    border: "1px solid black",
+    border: "2px solid black",
     borderCollapse: "collapse",
     width: "18vw",
     backgroundColor: "#FECC6B",
@@ -58,12 +58,83 @@ function App() {
   const [diag1, setDiag1] = React.useState(false);
   const [diag2, setDiag2] = React.useState(false);
 
+  const [numBingos, setNumBingos] = React.useState(0);
+
+  const [cookiesLoaded, setCookiesLoaded] = React.useState(false);
+
+  const loadCookies = () => {
+    console.log(document.cookie);
+    if (document.cookie !== "") {
+      setSquares(JSON.parse(document.cookie).squares);
+      setRows(JSON.parse(document.cookie).rows);
+      setColumns(JSON.parse(document.cookie).columns);
+      setDiag1(JSON.parse(document.cookie).diag1);
+      setDiag2(JSON.parse(document.cookie).diag2);
+      setNumBingos(JSON.parse(document.cookie).numBingos);
+    } else {
+      updateCookies();
+    }
+    console.log(document.cookie);
+  };
+
+  const updateCookies = () => {
+    let newCookie = {
+      squares: squares,
+      rows: rows,
+      columns: columns,
+      diag1: diag1,
+      diag2: diag2,
+      numBingos: numBingos,
+    };
+
+    document.cookie = JSON.stringify(newCookie);
+
+    console.log(document.cookie);
+  };
+
+  const clearBoard = () => {
+    setSquares([
+      [false, false, false, false, false],
+      [false, false, false, false, false],
+      [false, false, true, false, false],
+      [false, false, false, false, false],
+      [false, false, false, false, false],
+    ]);
+    setRows([false, false, false, false, false]);
+    setColumns([false, false, false, false, false]);
+    setDiag1(false);
+    setDiag2(false);
+    setNumBingos(0);
+
+    let newCookie = "";
+
+    document.cookie = newCookie;
+
+    console.log(document.cookie);
+  };
+
+  useEffect(() => {
+    if (!cookiesLoaded) {
+      setCookiesLoaded(true);
+      loadCookies();
+    } else {
+      updateCookies();
+    }
+  });
+
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
+    setNumBingos(numBingos - 1);
+    var millisecondsToWait = 500;
+    setTimeout(function () {
+      if (numBingos > 0) {
+        setOpen(true);
+      }
+    }, millisecondsToWait);
   };
 
   const handleClick = (x: number, y: number) => {
@@ -85,6 +156,7 @@ function App() {
       ) {
         if (!rows[h]) {
           setOpen(true);
+          setNumBingos(numBingos + 1);
           var newRows = rows.slice();
           newRows[h] = true;
           setRows(newRows);
@@ -102,6 +174,7 @@ function App() {
       ) {
         if (!columns[v]) {
           setOpen(true);
+          setNumBingos(numBingos + 1);
           var newColumns = columns.slice();
           newColumns[v] = true;
           setColumns(newColumns);
@@ -118,6 +191,7 @@ function App() {
     ) {
       if (!diag1) {
         setOpen(true);
+        setNumBingos(numBingos + 1);
         setDiag1(true);
       }
     }
@@ -138,14 +212,15 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="App" style={{backgroundImage: 'url(' + require('./background.png') + ')'}}>
       <Container>
         <Grid container justify="center">
           <Grid item>
             <Typography variant="h3">
               <img
-                src="../../Assets/logo.jpg"
+                src="../../Assets/logo.png"
                 style={{ height: "8rem", marginRight: "2rem" }}
+                alt="Summer Reading Challenge"
               ></img>
             </Typography>
           </Grid>
@@ -155,6 +230,18 @@ function App() {
             </Typography>
           </Grid>
         </Grid>
+        <Button
+          variant="contained"
+          onClick={() => {
+            clearBoard();
+          }}
+          style={{ marginBottom: "10px" }}
+        >
+          Clear Board
+        </Button>
+        <Typography variant="h5" style={{backgroundColor: "#FFFFFF"}}>Complete a row of challenges (vertically, horizontally, or diagonally)
+and fill out the form to be entered to win a prize!
+Participants may enter more than one completed sheet!</Typography>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <tr className={classes.trBorder}>
             <td
@@ -168,7 +255,7 @@ function App() {
               <BingoSquare
                 size=""
                 text="Read for 2 Hours"
-                image="../../Assets/1.jpg"
+                image="../../Assets/1.png"
               ></BingoSquare>
             </td>
             <td
@@ -182,7 +269,7 @@ function App() {
               <BingoSquare
                 size="60"
                 text="Like Us on Instagram @cidlib"
-                image="../../Assets/2.jpg"
+                image="../../Assets/2.png"
               ></BingoSquare>
             </td>
             <td
@@ -196,7 +283,7 @@ function App() {
               <BingoSquare
                 size="150"
                 text="Explore Crative Bug"
-                image="../../Assets/3.jpg"
+                image="../../Assets/3.png"
               ></BingoSquare>
             </td>
             <td
@@ -210,7 +297,7 @@ function App() {
               <BingoSquare
                 size="100"
                 text="Attend our 'Anywhere Reads' virtual book group"
-                image="../../Assets/4.jpg"
+                image="../../Assets/4.png"
               ></BingoSquare>
             </td>
             <td
@@ -224,7 +311,7 @@ function App() {
               <BingoSquare
                 size="200"
                 text="Research an Ancestor on Ancestry Library Edition"
-                image="../../Assets/5.jpg"
+                image="../../Assets/5.png"
               ></BingoSquare>
             </td>
           </tr>
@@ -240,7 +327,7 @@ function App() {
               <BingoSquare
                 size=""
                 text="Follow us on Facebook @CIDLibrary"
-                image="../../Assets/6.jpg"
+                image="../../Assets/6.png"
               ></BingoSquare>
             </td>
             <td
@@ -254,7 +341,7 @@ function App() {
               <BingoSquare
                 size="125"
                 text="Learn a Language with Mango"
-                image="../../Assets/7.jpg"
+                image="../../Assets/7.png"
               ></BingoSquare>
             </td>
             <td
@@ -268,7 +355,7 @@ function App() {
               <BingoSquare
                 size=""
                 text="Download a Book Using Overdrive"
-                image="../../Assets/8.jpg"
+                image="../../Assets/8.png"
               ></BingoSquare>
             </td>
             <td
@@ -282,7 +369,7 @@ function App() {
               <BingoSquare
                 size=""
                 text="Read a Romance Novel"
-                image="../../Assets/9.jpg"
+                image="../../Assets/9.png"
               ></BingoSquare>
             </td>
             <td
@@ -296,7 +383,7 @@ function App() {
               <BingoSquare
                 size=""
                 text="Read for 2 Hours"
-                image="../../Assets/1.jpg"
+                image="../../Assets/1.png"
               ></BingoSquare>
             </td>
           </tr>
@@ -312,7 +399,7 @@ function App() {
               <BingoSquare
                 size=""
                 text="Download Music Using Hoopla"
-                image="../../Assets/11.jpg"
+                image="../../Assets/11.png"
               ></BingoSquare>
             </td>
             <td
@@ -326,7 +413,7 @@ function App() {
               <BingoSquare
                 size=""
                 text="Subscribe to Our YouTube Channel"
-                image="../../Assets/12.jpg"
+                image="../../Assets/12.png"
               ></BingoSquare>
             </td>
             <td
@@ -340,7 +427,7 @@ function App() {
               <BingoSquare
                 size="165"
                 text="Free Space!"
-                image="../../Assets/13.jpg"
+                image="../../Assets/13.png"
               ></BingoSquare>
             </td>
             <td
@@ -354,7 +441,7 @@ function App() {
               <BingoSquare
                 size=""
                 text="Read for 2 Hours"
-                image="../../Assets/1.jpg"
+                image="../../Assets/1.png"
               ></BingoSquare>
             </td>
             <td
@@ -384,7 +471,7 @@ function App() {
               <BingoSquare
                 size=""
                 text="Download a Movie Using Kanopy"
-                image="../../Assets/16.jpg"
+                image="../../Assets/16.png"
               ></BingoSquare>
             </td>
             <td
@@ -398,7 +485,7 @@ function App() {
               <BingoSquare
                 size=""
                 text="Read for 2 Hours"
-                image="../../Assets/1.jpg"
+                image="../../Assets/1.png"
               ></BingoSquare>
             </td>
             <td
@@ -412,7 +499,7 @@ function App() {
               <BingoSquare
                 size=""
                 text="Download a Magazine using RBDigital"
-                image="../../Assets/18.jpg"
+                image="../../Assets/18.png"
               ></BingoSquare>
             </td>
             <td
@@ -426,7 +513,7 @@ function App() {
               <BingoSquare
                 size=""
                 text="Read a Post on Beth's Blog"
-                image="../../Assets/19.jpg"
+                image="../../Assets/19.png"
               ></BingoSquare>
             </td>
             <td
@@ -440,7 +527,7 @@ function App() {
               <BingoSquare
                 size=""
                 text="Download a Book Using Overdrive"
-                image="../../Assets/8.jpg"
+                image="../../Assets/8.png"
               ></BingoSquare>
             </td>
           </tr>
@@ -456,7 +543,7 @@ function App() {
               <BingoSquare
                 size=""
                 text="Take a Class with Gale Courses"
-                image="../../Assets/21.jpg"
+                image="../../Assets/21.png"
               ></BingoSquare>
             </td>
             <td
@@ -470,7 +557,7 @@ function App() {
               <BingoSquare
                 size=""
                 text="Read a Chilren's Book"
-                image="../../Assets/22.jpg"
+                image="../../Assets/22.png"
               ></BingoSquare>
             </td>
             <td
@@ -484,7 +571,7 @@ function App() {
               <BingoSquare
                 size=""
                 text="Download a Comic With Hoopla"
-                image="../../Assets/11.jpg"
+                image="../../Assets/11.png"
               ></BingoSquare>
             </td>
             <td
@@ -498,7 +585,7 @@ function App() {
               <BingoSquare
                 size=""
                 text="Read for 2 Hours"
-                image="../../Assets/1.jpg"
+                image="../../Assets/1.png"
               ></BingoSquare>
             </td>
             <td
@@ -512,7 +599,7 @@ function App() {
               <BingoSquare
                 size=""
                 text="Attend a Virtual Library Event"
-                image="../../Assets/25.jpg"
+                image="../../Assets/25.png"
               ></BingoSquare>
             </td>
           </tr>
@@ -531,7 +618,7 @@ function App() {
             "You got a bingo! Fill out the form below to be entered to win a prize!"
           }
         </DialogTitle>
-        <DialogContent>Form here</DialogContent>
+        <DialogContent><iframe src="https://docs.google.com/forms/d/e/1FAIpQLSesV0XSTUr2HBxqc3Z9eWLyjnIOKTUP2ckr8A1pPCRWbDgfYA/viewform?embedded=true" width="100%" height="100%" title="Bingo Form">Loading…</iframe></DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Done
