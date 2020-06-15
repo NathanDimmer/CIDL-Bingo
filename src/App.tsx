@@ -61,6 +61,7 @@ function App() {
   const [cookiesLoaded, setCookiesLoaded] = React.useState(false);
 
   const [warning, setWarning] = React.useState(false);
+  const [warningShown, setWarningShown] = React.useState(false);
 
   const loadCookies = () => {
     console.log(document.cookie);
@@ -113,23 +114,37 @@ function App() {
     console.log(document.cookie);
   };
 
+  const checkScreenSize = () => {
+
+  }
+
+  const findHeight = () => {
+    if ((window.innerWidth < 800) && (!warningShown)) {
+      setWarning(true)
+      setWarningShown(true)
+    }
+  };
+
   useEffect(() => {
     if (!cookiesLoaded) {
       setCookiesLoaded(true);
       loadCookies();
+      findHeight();
     } else {
       updateCookies();
-      // if (window.innerWidth < 600) {
-      //   setWarning(true);
-      // }
-    }
+      }
+      window.addEventListener("resize", findHeight);
+
+      return () => {
+        window.removeEventListener("resize", findHeight);
+      };
   });
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-  const handleCLoseWarning = () => {
+  const handleCloseWarning = () => {
     setWarning(false);
   }
 
@@ -651,7 +666,7 @@ Participants may enter more than one completed sheet!</Typography>
       <Dialog
         open={warning}
         keepMounted
-        onClose={handleCLoseWarning}
+        onClose={handleCloseWarning}
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
@@ -662,11 +677,11 @@ Participants may enter more than one completed sheet!</Typography>
         </DialogTitle>
         <DialogContent><Typography variant="body1">For a better experience, we recommend that you either open this site on a device with a larger screen, or view the PDF copy of the bingo sheet, and submit your bingos by calling the library.</Typography></DialogContent>
           <DialogActions>
-          <Button onClick={handleClose} color="primary" variant="text">
+          <Button onClick={handleCloseWarning} color="primary" variant="text">
             Continue anyway
           </Button>
           <a href="https://cidlibrary.org/images/Adult/2020%20-%20Adult%20SRP%20Bingo%20Sheet(Web).pdf">
-          <Button onClick={handleClose} color="primary" variant="contained">
+          <Button color="primary" variant="contained">
             View PDF
           </Button>
           </a>
