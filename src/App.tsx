@@ -279,7 +279,7 @@ function App() {
         >
           Complete a row of challenges (vertically, horizontally, or diagonally)
           and fill out the form to be entered to win a prize! Participants may
-          enter more than one completed sheet! \n Please note: When you complete
+          enter more than one completed sheet! <br />Please note: When you complete
           a Bingo, a form will come up asking for your information, including
           what prize you are putting this bingo in for.
         </Typography>
@@ -324,7 +324,7 @@ function App() {
               >
                 <BingoSquare
                   size="150"
-                  text="Explore Crative Bug"
+                  text="Explore Creative Bug"
                   image="../../Assets/3.png"
                 ></BingoSquare>
               </td>
@@ -496,7 +496,7 @@ function App() {
               >
                 <BingoSquare
                   size=""
-                  text="Learn About One of Our Resources by Watching an Explore in Four Video"
+                  text="Learn About One of Our Resources by Watching an Explore in 4 Video"
                   image=""
                 ></BingoSquare>
               </td>
@@ -598,7 +598,7 @@ function App() {
               >
                 <BingoSquare
                   size=""
-                  text="Read a Chilren's Book"
+                  text="Read a Children's Book"
                   image="../../Assets/22.png"
                 ></BingoSquare>
               </td>
