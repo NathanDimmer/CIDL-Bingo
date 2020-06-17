@@ -12,6 +12,8 @@ import {
   Button,
 } from "@material-ui/core";
 import BingoSquare from "./bingoSquare";
+import {isIOS, isMacOs} from "react-device-detect";
+
 
 const useStyles = makeStyles({
   trBorder: {
@@ -123,11 +125,15 @@ function App() {
 
   useEffect(() => {
     if (!cookiesLoaded) {
-      // setCookiesLoaded(true);
-      // loadCookies();
+      if (!isIOS && !isMacOs) {
+        setCookiesLoaded(true);
+        loadCookies();
+      }
       findHeight();
     } else {
-      // updateCookies();
+      if (!isIOS && !isMacOs) {
+        updateCookies();
+      }
     }
   });
 
